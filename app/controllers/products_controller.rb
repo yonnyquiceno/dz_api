@@ -3,6 +3,10 @@ class ProductsController < ApplicationController
   before_action :set_category, only: :search
 
   def search
+    @query = @params[:q]
+    @products = Product.by_name_query(@query)
+    render json: @products
+    # render json: @products.first, serializer: ProductSerializer
   end
 
   def set_params
