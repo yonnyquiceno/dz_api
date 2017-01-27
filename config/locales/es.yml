@@ -1,7 +1,5 @@
 es:
-  hello: "Hola mundo!"
-  products:
-    search:
-      welcome: 'Bienvenido!'
+  models:
+    category:
       amalgams: 'Amalgamas'
       apparatus: 'Aparatos'
