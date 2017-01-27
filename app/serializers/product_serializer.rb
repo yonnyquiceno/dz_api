@@ -3,7 +3,6 @@ class ProductSerializer < ActiveModel::Serializer
               :price,
               :image
 
-
   def root
     'suggestions'
   end
