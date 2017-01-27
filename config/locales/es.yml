@@ -1,0 +1,7 @@
+es:
+  hello: "Hola mundo!"
+  products:
+    search:
+      welcome: 'Bienvenido!'
+      amalgams: 'Amalgamas'
+      apparatus: 'Aparatos'
