@@ -5,6 +5,7 @@ gem 'mysql2'
 gem 'active_model_serializers'
 gem 'uglifier'
 gem 'turbolinks'
+gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'apitome', github: 'jejacks0n/apitome'
