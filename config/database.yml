@@ -6,7 +6,9 @@ default: &default
   password:
 
 development:
-  <<: *default
+  adapter: postgresql
+  host: localhost
+  username: root
   database: dz_development
 
 test:
