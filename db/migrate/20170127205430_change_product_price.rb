@@ -1,6 +1,6 @@
 class ChangeProductPrice < ActiveRecord::Migration
   def change
     # change_column :products, :price, :decimal, precision: 10, scale: 2
-    change_column :products, :price, :float 
+    change_column :products, :price, 'float USING CAST(price AS float)' 
   end
 end

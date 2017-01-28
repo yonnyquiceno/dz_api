@@ -12,3 +12,7 @@ test:
 development:
   <<: *default
   database: dz_test
+
+production:
+  <<: *default
+  database: db/production.postgresql

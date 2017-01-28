@@ -1,11 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
 gem 'rails', '4.2.6'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'mysql2'
 gem 'active_model_serializers'
-gem 'jquery-rails'
+gem 'uglifier'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -14,8 +12,7 @@ gem 'apitome', github: 'jejacks0n/apitome'
 gem 'fuzzy-string-match'
 
 group :development, :test do
-  gem 'mysql2'
-  gem 'byebug'
+    gem 'byebug'
   gem 'rspec-rails'
   gem 'rspec_api_documentation'
   gem 'rspec-json_expectations'
