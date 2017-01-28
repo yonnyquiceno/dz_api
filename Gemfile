@@ -14,7 +14,7 @@ gem 'apitome', github: 'jejacks0n/apitome'
 # gem 'apitome'
 gem 'fuzzy-string-match'
 gem 'rails_12factor'
-
+gem 'pg'
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
