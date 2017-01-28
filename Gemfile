@@ -9,11 +9,18 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+gem 'apitome', github: 'jejacks0n/apitome'
+# gem 'apitome'
 gem 'fuzzy-string-match'
 
 group :development, :test do
   gem 'byebug'
+  gem 'rspec-rails'
+  gem 'rspec_api_documentation'
+  gem 'rspec-json_expectations'
+  gem 'shoulda-matchers', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do

@@ -10,7 +10,7 @@ class Product < ActiveRecord::Base
     jarow = FuzzyStringMatch::JaroWinkler.create(:native)
     @scores = {}
     prods.each do |prod|
-      @scores[prod] = jarow.getDistance(prod.name.downcase, query)
+      @scores[prod] = jarow.getDistance(prod.name.downcase, query.downcase)
     end
     avoid_non_relevant_results(threshold) if threshold
     @scores = @scores.sort_by { |_key, value| value }.reverse.flatten

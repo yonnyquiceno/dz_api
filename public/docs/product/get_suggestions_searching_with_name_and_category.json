@@ -1,0 +1,57 @@
+{
+  "resource": "Product",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "suggestions",
+  "description": "Get Suggestions searching with name and category",
+  "explanation": "This query return autocomplete product suggestions of all prices for a given name(q) and category",
+  "parameters": [
+    {
+      "required": true,
+      "name": "q",
+      "description": "Search term"
+    },
+    {
+      "name": "minprice",
+      "description": "Minimum product price"
+    },
+    {
+      "name": "maxprice",
+      "description": "Maximum product price"
+    },
+    {
+      "name": "cat",
+      "description": "Product Category"
+    },
+    {
+      "name": "thold",
+      "description": "threshold (avoid irrelevant results)"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "suggestions?q=megaly+n2300&cat=285",
+      "request_body": null,
+      "request_headers": {
+        "Host": "example.org"
+      },
+      "request_query_parameters": {
+        "q": "megaly n2300",
+        "cat": "285"
+      },
+      "request_content_type": null,
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"suggestions\": [\n    {\n      \"name\": \"MEGALLOY N.2 AMALGAMA 300u\",\n      \"price\": 82.66,\n      \"image\": \"https://placehold.it/50x50.png\",\n      \"category\": {\n        \"id\": 285,\n        \"trans\": {\n          \"en\": \"Apparatus\",\n          \"es\": \"Aparatos\"\n        }\n      }\n    },\n    {\n      \"name\": \"MEGALLOY N.1 AMALGAMA 200u\",\n      \"price\": 1.59,\n      \"image\": \"https://placehold.it/50x50.png\",\n      \"category\": {\n        \"id\": 285,\n        \"trans\": {\n          \"en\": \"Apparatus\",\n          \"es\": \"Aparatos\"\n        }\n      }\n    }\n  ]\n}",
+      "response_headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}
