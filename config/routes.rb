@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-	get '/suggestions', to: 'products#search'
+	get '/suggestions', to: 'products#suggest'
 end
