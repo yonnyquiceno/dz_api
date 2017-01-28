@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_params
-  before_action :set_category, :set_price_range, only: :suggest
+  before_action :set_category, :set_price_range, :set_threshold, only: :suggest
 
   def suggest
     @query = @params[:q]
@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
                else
                  @cat.products.by_price_range(@p_r[0], @p_r[1])
                end
-      @sorted_products = Product.sort_by_similarity(@prods, @query, @params[:thold].to_f)
+      @sorted_products = Product.sort_by_similarity(@prods, @query, @threshold)
       if @sorted_products == []
         render(json: { errors: ['no matching products'] }, status: :not_found)
       else
@@ -38,5 +38,9 @@ class ProductsController < ApplicationController
     @p_r = []
     @params[:minprice].nil? || @params[:minprice] == '' ? @p_r[0] = 0 : @p_r[0] = @params[:minprice].to_i
     @params[:maxprice].nil? || @params[:maxprice] == '' ? @p_r[1] = Float::INFINITY : @p_r[1] = @params[:maxprice].to_i
+  end
+
+  def set_threshold
+    @threshold = @params[:thold].to_f
   end
 end
