@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'apitome', github: 'jejacks0n/apitome'
 # gem 'apitome'
 gem 'fuzzy-string-match'
+
 group :development, :test do
   gem 'mysql2'
   gem 'byebug'
