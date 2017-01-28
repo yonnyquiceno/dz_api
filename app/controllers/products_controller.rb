@@ -5,11 +5,11 @@ class ProductsController < ApplicationController
   def suggest
     @query = @params[:q]
     if @query && @query != ''
-      if @cat.nil?
-        @prods = Product.by_price_range(@p_r[0], @p_r[1])
-      else
-        @prods = @cat.products.by_price_range(@p_r[0], @p_r[1])
-      end
+      @prods = if @cat.nil?
+                 Product.by_price_range(@p_r[0], @p_r[1])
+               else
+                 @cat.products.by_price_range(@p_r[0], @p_r[1])
+               end
       @sorted_products = Product.sort_by_similarity(@prods, @query)
       if @sorted_products == []
         render(json: { errors: ['no matching products'] }, status: :not_found)

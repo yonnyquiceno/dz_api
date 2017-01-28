@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   require 'fuzzystringmatch'
 
   belongs_to :category
+
   scope :by_category, -> (cat) { where(category: cat) }
   scope :by_price_range, -> (min, max) { where(price: min..max) }
 
