@@ -5,12 +5,6 @@ default: &default
   username: root
   password:
 
-production:
-  adapter: postgresql
-  host: localhost
-  username: root
-  database: dz_production
-
 test:
   <<: *default
   database: dz_test
