@@ -5,10 +5,14 @@ default: &default
   username: root
   password:
 
+test:
+  <<: *default
+  database: dz_test
+
 development:
   <<: *default
   database: dz_development
 
-test:
+production:
   <<: *default
-  database: dz_test
+  database: db/production.postgresql
