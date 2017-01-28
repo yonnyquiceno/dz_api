@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
                else
                  @cat.products.by_price_range(@p_r[0], @p_r[1])
                end
-      @sorted_products = Product.sort_by_similarity(@prods, @query)
+      @sorted_products = Product.sort_by_similarity(@prods, @query, @params[:thold].to_f)
       if @sorted_products == []
         render(json: { errors: ['no matching products'] }, status: :not_found)
       else
@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
   private
 
   def set_params
-    @params = params.permit(:q, :minprice, :maxprice, :cat)
+    @params = params.permit(:q, :minprice, :maxprice, :cat, :thold)
   end
 
   def set_category
