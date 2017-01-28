@@ -12,73 +12,131 @@ resource 'Product' do
     parameter 'thold', 'threshold (avoid irrelevant results)'
 
     example 'Get Suggestions with name only' do
-      explanation "This query return autocomplete product suggestions of all categories and prices for a given name(q) query"
+      explanation 'This query return autocomplete product suggestions of all categories and prices for a given name(q) query'
 
-      cat1 = FactoryGirl.create(:category, name: "apparatus")
-      cat2 = FactoryGirl.create(:category, name: "apparatus")
+      cat1 = FactoryGirl.create(:category, name: 'apparatus')
+      cat2 = FactoryGirl.create(:category, name: 'apparatus')
 
-      p1 = FactoryGirl.create(:product, name: "MEGALLOY N.2 AMALGAMA 300u", category: cat1)
-      p2 = FactoryGirl.create(:product,  name: "MEGALLOY N.1 AMALGAMA 200u", category: cat1)
+      p1 = FactoryGirl.create(:product, name: 'MEGALLOY N.2 AMALGAMA 300u', category: cat1)
+      p2 = FactoryGirl.create(:product, name: 'MEGALLOY N.1 AMALGAMA 200u', category: cat1)
       p4 = FactoryGirl.create(:product, category: cat2)
       p5 = FactoryGirl.create(:product, category: cat2)
 
-      do_request(q: "megaly n2300")
+      do_request(q: 'megaly n2300')
 
       expect(response_status).to eq(200)
-      # expect(response_body).to include_json(
+      expect(response_body).to include_json(
+        suggestions: [
+          {
+            name: 'MEGALLOY N.2 AMALGAMA 300u',
+            price: p1.price,
+            image: 'https://placehold.it/50x50.png',
+            category: {
+              trans: {
+                en: 'Apparatus',
+                es: 'Aparatos'
+              }
+            }
+          },
+          {
+            name: 'MEGALLOY N.1 AMALGAMA 200u',
+            price: p2.price,
+            image: 'https://placehold.it/50x50.png',
+            category: {
+              id: cat1.id,
+              trans: {
+                en: 'Apparatus',
+                es: 'Aparatos'
+              }
+            }
+          }
+        ]
+      )
     end
 
     example 'Get Suggestions searching with name and category' do
-      explanation "This query return autocomplete product suggestions of all prices for a given name(q) and category"
+      explanation 'This query return autocomplete product suggestions of all prices for a given name(q) and category'
 
-      cat1 = FactoryGirl.create(:category, name: "apparatus")
-      cat2 = FactoryGirl.create(:category, name: "apparatus")
+      cat1 = FactoryGirl.create(:category, name: 'apparatus')
+      cat2 = FactoryGirl.create(:category, name: 'apparatus')
 
-      p1 = FactoryGirl.create(:product, name: "MEGALLOY N.2 AMALGAMA 300u", category: cat1)
-      p2 = FactoryGirl.create(:product,  name: "MEGALLOY N.1 AMALGAMA 200u", category: cat1)
+      p1 = FactoryGirl.create(:product, name: 'MEGALLOY N.2 AMALGAMA 300u', category: cat1)
+      p2 = FactoryGirl.create(:product, name: 'MEGALLOY N.1 AMALGAMA 200u', category: cat1)
       p4 = FactoryGirl.create(:product, category: cat2)
       p5 = FactoryGirl.create(:product, category: cat2)
 
-      do_request(q: "megaly n2300", cat: cat1.id)
+      do_request(q: 'megaly n2300', cat: cat1.id)
 
       expect(response_status).to eq(200)
-      # expect(response_body).to include_json(
+      expect(response_body).not_to include_json(
+        suggestions: [
+          {
+            name: p4.name,
+            price: p4.price,
+            category: {
+              id: cat2.id
+            }
+          }
+        ]
+      )
     end
 
     example 'Get Suggestions searching with name, category, and price range' do
-      explanation "This query return autocomplete product suggestions for a given name(q), category, minprice and maxprice"
+      explanation 'This query return autocomplete product suggestions for a given name(q), category, minprice and maxprice'
 
-      cat1 = FactoryGirl.create(:category, name: "apparatus")
-      cat2 = FactoryGirl.create(:category, name: "apparatus")
+      cat1 = FactoryGirl.create(:category, name: 'apparatus')
+      cat2 = FactoryGirl.create(:category, name: 'apparatus')
 
-      p1 = FactoryGirl.create(:product, price: 1000.50, name: "MEGALLOY N.2 AMALGAMA 300u", category: cat1)
-      p2 = FactoryGirl.create(:product, price: 1200.60, name: "MEGALLOY N.1 AMALGAMA 200u", category: cat1)
+      p1 = FactoryGirl.create(:product, price: 1000.50, name: 'MEGALLOY N.2 AMALGAMA 300u', category: cat1)
+      p2 = FactoryGirl.create(:product, price: 1200.60, name: 'MEGALLOY N.1 AMALGAMA 200u', category: cat1)
       p4 = FactoryGirl.create(:product, price: 400.34, category: cat2)
       p5 = FactoryGirl.create(:product, price: 500.29, category: cat2)
 
-      do_request(q: "megaly n2300", cat: cat1.id, minprice: 800, maxprice: 1500)
+      do_request(q: 'megaly n2300', cat: cat1.id, minprice: 800, maxprice: 1100)
 
       expect(response_status).to eq(200)
-      # expect(response_body).to include_json(
+      expect(response_body).not_to include_json(
+        suggestions: [
+          {
+            name: p2.name,
+            price: p2.price,
+          }
+        ]
+      )
     end
 
     example 'Get Suggestions searching with name and threshold' do
-      explanation "This query return autocomplete product suggestions for a given name(q) and thold"
+      explanation 'This query return autocomplete product suggestions for a given name(q) and thold'
 
-      cat1 = FactoryGirl.create(:category, name: "apparatus")
-      cat2 = FactoryGirl.create(:category, name: "apparatus")
+      cat1 = FactoryGirl.create(:category, name: 'apparatus')
+      cat2 = FactoryGirl.create(:category, name: 'apparatus')
 
-      p1 = FactoryGirl.create(:product, price: 1000.50, name: "MEGALLOY N.2 AMALGAMA 300u", category: cat1)
+      p1 = FactoryGirl.create(:product, price: 1000.50, name: 'MEGALLOY N.2 AMALGAMA 300u', category: cat1)
       p2 = FactoryGirl.create(:product, price: 400.34, category: cat1)
       p3 = FactoryGirl.create(:product, price: 400.34, category: cat1)
       p4 = FactoryGirl.create(:product, price: 400.34, category: cat1)
       p5 = FactoryGirl.create(:product, price: 400.34, category: cat2)
       p6 = FactoryGirl.create(:product, price: 500.29, category: cat2)
 
-      do_request(q: "MEGALLOY N.2 AMALGAMA 300u0", thold: 0.9)
+      do_request(q: 'MEGALLOY N.2 AMALGAMA 300u0', thold: 0.9)
 
       expect(response_status).to eq(200)
-      # expect(response_body).to include_json(
+      expect(response_body).to include_json(
+        suggestions: [
+          {
+            name: p1.name,
+            price: p1.price,
+          }
+        ]
+      )
+      expect(response_body).not_to include_json(
+        suggestions: [
+          {
+            name: p2.name,
+            price: p2.price
+          }
+        ]
+      )
     end
   end
 end
