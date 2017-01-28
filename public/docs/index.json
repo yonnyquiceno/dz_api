@@ -1,0 +1,38 @@
+{
+  "resources": [
+    {
+      "name": "Product",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Get Suggestions searching with name and category",
+          "link": "product/get_suggestions_searching_with_name_and_category.json",
+          "groups": "all",
+          "route": "suggestions",
+          "method": "get"
+        },
+        {
+          "description": "Get Suggestions searching with name and threshold",
+          "link": "product/get_suggestions_searching_with_name_and_threshold.json",
+          "groups": "all",
+          "route": "suggestions",
+          "method": "get"
+        },
+        {
+          "description": "Get Suggestions searching with name, category, and price range",
+          "link": "product/get_suggestions_searching_with_name,_category,_and_price_range.json",
+          "groups": "all",
+          "route": "suggestions",
+          "method": "get"
+        },
+        {
+          "description": "Get Suggestions with name only",
+          "link": "product/get_suggestions_with_name_only.json",
+          "groups": "all",
+          "route": "suggestions",
+          "method": "get"
+        }
+      ]
+    }
+  ]
+}
