@@ -1,8 +1,6 @@
 == Search suggestions API
 
-API deploy at: https://dz-suggestions-api.herokuapp.com
-
-Visit the API documentation at /docs
+API deploy at: https://dz-suggestions-api.herokuapp.com/docs
 
 Suggestions endpoint at /suggestions
 
